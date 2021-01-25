@@ -1,5 +1,3 @@
-# pypsa-in-prime
-
 # Running PyPSA-Eur-Sec in PRIME
 
 This repository includes instructions and tricks to run PyPSA-Eur-Sec in the cluster PRIME.
@@ -8,14 +6,14 @@ Its main purpose is to help master and PhD students install the packages and run
 
 If you encounter a problem (and hopefully also a solution). Please, edit this README file with the solution so that other students can also benefit.
 
-***GENERAL INSTRUCTIONS FOR PYPSA-EUR-SEC***
+### GENERAL INSTRUCTIONS FOR PYPSA-EUR-SEC ###
 
 PyPSA-Eur-Sec allows the optimization of the sector-coupled European energy system and includes as a subpackage PyPSA-Eur (which includes only the power sector). PyPSA-Eur can be run independently or it can be called from PyPSA-Eur-Sec by selecting in the configuration file
 only the power sector. Technology-Data is a repository including costs, efficiencies, lifetimes, etc for different technologies.
 
 There is a [distribution list](https://groups.google.com/g/pypsa) where PyPSA-related problems (and solutions) are discussed.
 
-There is also documentation for [PyPSA](https://pypsa.readthedocs.io/en/latest/), [PyPSA-Eur](https://pypsa-eur.readthedocs.io/en/latest/) and [PyPSA-Eur-Sec](https://pypsa-eur-sec.readthedocs.io/en/latest/)
+There is also documentation for [PyPSA](https://pypsa.readthedocs.io/en/latest/), [PyPSA-Eur](https://pypsa-eur.readthedocs.io/en/latest/) and [PyPSA-Eur-Sec](https://pypsa-eur-sec.readthedocs.io/en/latest/).
 
 This repository does not substitute any of the previous information and it only focuses on issues related to running PyPSA-Eur-Sec in PRIME.
 
@@ -32,9 +30,9 @@ This [video](https://www.youtube.com/watch?v=ty47YU1_eeQ) provides a nice introd
 2. You can connect to the cluster through the terminal, e.g.
 > ssh marta@prime.eng.au.dk
 
-3. Some useful commands to use in the cluster are described in the [labbook](https://labbook.au.dk/display/COM/3.+Convenient+commands)
+3. Some useful commands to use in the cluster are described in the [labbook](https://labbook.au.dk/display/COM/3.+Convenient+commands).
 
-4. If you are using Windows, [WinSCP](https://winscp.net/eng/download.php) can be useful to copy folders to/from the cluster
+4. If you are using Windows, [WinSCP](https://winscp.net/eng/download.php) can be useful to copy folders to/from the cluster.
 
 5. To connect to the cluster you need to be connected to the university network, so if you are at home you need to use the VPN
 
@@ -90,6 +88,7 @@ This points Gurobi to the cluster-license. Note that an academic license used lo
 
 
 15. Solution to "Solver (gurobi) returned non-zero return code (127)"
+
 A change needs to be made to the file 'gurobi.sh' located in /home/(AU-ID)/anaconda3/envs/(pypsa-eur_environment_name)/bin/gurobi.sh . The last line of this shell script needs to point to 'python2.7', 
 regardless of what Python version is used in the pypsa-eur environment in your local folder. Thus, the last line of 'gurobi.sh' needs to be:
  
@@ -99,17 +98,17 @@ Make sure to restart the terminal for these modifications to take effect.
 
 
 16. Solution to "memory error". 
+
 The config file should include a path to a folder where the temporal files during the solving of the network are saved.
 
 > tmpdir: "/home/marta/tmp"
 
-If this path is not specified, the [default is to use the directory where the script is being executed]
-(https://github.com/PyPSA/pypsa-eur/blob/2e70e8d15b722e818efb57cf72b35a9536340365/scripts/solve_network.py#L281) which can cause errors due to not enough space in PRIME.  
+If this path is not specified, the [default is to use the directory where the script is being executed](https://github.com/PyPSA/pypsa-eur/blob/2e70e8d15b722e818efb57cf72b35a9536340365/scripts/solve_network.py#L281) which can cause errors due to not enough space in PRIME.  
 
 
 17. Solution to "memory error".
 
-Indicate that temporary files for the solver must the saved in the temporary directory specified in the config file by changing the script 'solve_network.py' and including the attribute
+Indicate that temporary files for the solver must be saved in the temporary directory specified in the config file by changing the script 'solve_network.py' and including the attribute
 > n.lopf(pyomo=False, solver_name=solver_name, solver_dir=tmpdir,
 
 18. I (Marta) have manually increased the resources in rule build_renewable_profiles to speed up that rule in the cluster.
