@@ -34,7 +34,7 @@ This [video](https://www.youtube.com/watch?v=ty47YU1_eeQ) provides a nice introd
 
 4. If you are using Windows, [WinSCP](https://winscp.net/eng/download.php) can be useful to copy folders to/from the cluster.
 
-5. To connect to the cluster you need to be connected to the university network, so if you are at home you need to use the VPN
+5. To connect to the cluster you need to be connected to the university network, so if you are at home you need to use the VPN (The VPN only works for employee's and PhD students. Master students need to be on university network to connect to the cluster)
 
 6. You will need to have installed anaconda/miniconda in your home directory at the cluster
 
