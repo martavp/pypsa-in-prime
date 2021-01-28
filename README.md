@@ -32,7 +32,7 @@ This [video](https://www.youtube.com/watch?v=ty47YU1_eeQ) provides a nice introd
 
 3. Some useful commands to use in the cluster are described in the [labbook](https://labbook.au.dk/display/COM/3.+Convenient+commands).
 
-4. If you are using Windows, [WinSCP](https://winscp.net/eng/download.php) can be useful to copy folders to/from the cluster.
+4. If you are using Windows, [WinSCP](https://winscp.net/eng/download.php) can be useful to copy folders to/from the cluster. Alternatively, use FileZilla on Windows, OSX or Linux. 
 
 5. To connect to the cluster you need to be connected to the university network, so if you are at home you need to use the VPN (The VPN only works for employee's and PhD students. Master students need to be on university network to connect to the cluster)
 
@@ -60,7 +60,7 @@ Then, to run snakemake, you only need to write the following instruction in the 
 
 > ./snakemake_cluster --jobs 5
 
-11. It is possible that you need to give rights to snakemake_cluster, you can do it typing in the terminal.
+11. It is possible that you need to give execution permissions to snakemake_cluster, you can do it typing in the terminal.
 
 > chmod u+x snakemake_cluster
 
@@ -126,7 +126,7 @@ In practice, this means adding the following text:
 >                **config['scenario'])
 
 
-20. Terminal multiplexer (optional, but useful)  
+20. Terminal multiplexer (optional, but useful)
 ATTENTION: The execution of the workflow in a tmux-window defined in the Snakefile may result in the 'solve_network' rule to fail. This is different from system to system, but if it occurs, it can be solved by executing the rule 'solve_network' outside tmux.  
 When
 
