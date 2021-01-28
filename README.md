@@ -127,6 +127,25 @@ In practice, this means adding the following text:
 
 
 20. Terminal multiplexer (optional, but useful)
+
+If you get disconnected or close your terminal your execution ends. If you want to simulate over an extended period of time this needs to be obmitted. What you need to use is a terminal multiplexer. In the following there are listed two alternatives.
+
+20a. GNU Screen
+
+This is the easier choice as it is already installed. 
+Starting Named Session by typing:
+> screen -S session_name
+You can detach from the screen session at any time by typing:
+> Ctrl+a d
+This means that it will run in the background.
+To resume your screen session use the following command:
+> screen -r
+To find the session ID list the current running screen sessions with:
+> screen -ls
+
+20b. TMUX
+
+TMUX is another terminal multiplexer but needs to be installed first. 
 ATTENTION: The execution of the workflow in a tmux-window defined in the Snakefile may result in the 'solve_network' rule to fail. This is different from system to system, but if it occurs, it can be solved by executing the rule 'solve_network' outside tmux.  
 When
 
