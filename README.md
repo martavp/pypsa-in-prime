@@ -172,3 +172,4 @@ To get a list of the created sessions. The tmux commands described here, as well
 
 21. Environment file that works for Mac (17/5-2021)
 
+This environment file (./environment_pypsa_eur_macos.yml) works for pypsa-eur-sec on MacOs. It may also work on other systems (not testet). 
