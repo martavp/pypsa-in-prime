@@ -169,3 +169,6 @@ If one has forgotten the name of the session when trying to reattach, simply exe
 > tmux
 
 To get a list of the created sessions. The tmux commands described here, as well as many other neat ones, can be found  in this [article](https://www.howtogeek.com/671422/how-to-use-tmux-on-linux-and-why-its-better-than-screen/).
+
+21. Environment file that works for Mac (17/5-2021)
+
