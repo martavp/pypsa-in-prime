@@ -173,3 +173,19 @@ To get a list of the created sessions. The tmux commands described here, as well
 21. Environment file that works for Mac (17/5-2021)
 
 This environment file (./environments/environment_pypsa_eur_macos.yml) works for pypsa-eur-sec on MacOs. It may also work on other systems (not testet). 
+
+22. VS Code 
+
+[Visual Studio Code](https://code.visualstudio.com/) is a handy tool when working on the PRIME. It allows you to have your file explorer, [python editor](https://code.visualstudio.com/docs/python/python-tutorial), and terminal in one window. Install the [Remote - SSH extension](https://code.visualstudio.com/docs/remote/ssh) to connect with PRIME.
+
+23. Avoid entering password when connecting to PRIME
+
+On your local computer:
+
+> (Local path) > ssh-keygen
+
+Press _Enter_ for default key name. Then _Enter_ for no password, and then _Enter_ again to confirm. A password key is created under *Local path* in the file _"id_rsa.pub"_. Open the file and copy the text. Login to PRIME. On PRIME:
+
+> (PRIME path) > vim ~/.ssh/ authorized_keys
+
+Paste the text (by right clicking) and save the file: Hit _Escape_, then write the command _:wq_ to save the file. You are now good to go.
