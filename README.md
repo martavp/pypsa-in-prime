@@ -36,7 +36,7 @@ This [video](https://www.youtube.com/watch?v=ty47YU1_eeQ) provides a nice introd
 
 5. To connect to the cluster you need to be connected to the university network, so if you are at home you need to use the VPN (The VPN only works for employee's and PhD students. Master students need to be on university network to connect to the cluster)
 
-6. You will need to have installed anaconda/miniconda in your home directory at the cluster
+6. You will need to have installed [anaconda/miniconda](https://docs.conda.io/projects/conda/en/latest/user-guide/install/linux.html) in your home directory at the cluster
 
 7. You can install PyPSA-Eur-Sec following the [instructions](https://pypsa-eur-sec.readthedocs.io/en/latest/installation.html) 
 
@@ -64,11 +64,10 @@ Then, to run snakemake, you only need to write the following instruction in the 
 
 > chmod u+x snakemake_cluster
 
-12. Create a directory 'logs/cluster", as indicated in the file 'cluster.yaml'. This is where the logs and error files will be saved.
+12. Create a directory 'logs/cluster", as indicated in the file 'cluster.yaml'. This is where the logs and error files will be saved. Make sure that a folder 'logs/cluster' also exists in 'pypsa-eur/logs/cluster'.
 
 13. Check that the variable names in 'snakemake_cluster' comply with the variable names in your Snakefile. In particular, check that the memory attribution 
-(mem_mb) is the same in both files or correct if necessary. 
-
+(mem_mb) is the same in both files or correct if necessary. If any of the rule in 'pypsa-eur/Snakefile' is missing 'resources: mem_mb=' add it or substitute 'mem' by 'mem_mb'
 
 14. Setting up Gurobi in the cluster  
 
@@ -189,3 +188,6 @@ Press _Enter_ for default key name. Then _Enter_ for no password, and then _Ente
 > (PRIME path) > vim ~/.ssh/ authorized_keys
 
 Paste the text (by right clicking) and save the file: Hit _Escape_, then write the command _:wq_ to save the file. You are now good to go.
+
+24. 2021/08/31 As of today, I (Marta) have everything running on the cluster nicely with the following versions pypsa=0.18.0; 
+pypsa-eur=0.3.0, pypsa-eur-sec=0.5.0, technology-data=0.2.0. In case someone needs a reference of a compatible setup of packages.
