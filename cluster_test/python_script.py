@@ -7,12 +7,4 @@ def make_csv():
     output.to_csv(snakemake.output.csv_file_out)
 
 if __name__ == "__main__":
-    # Detect running outside of snakemake and mock snakemake for testing
-    if 'snakemake' not in globals():
-        from vresutils import Dict
-        import yaml
-        snakemake = Dict()
-        with open('config_wildcard.yaml') as f:
-            snakemake.config = yaml.safe_load(f)
-
     make_csv()
