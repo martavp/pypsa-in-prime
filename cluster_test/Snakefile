@@ -1,0 +1,14 @@
+nos = '1 2 3 4 5'
+
+rule all:
+    input:
+        expand("csv_output_{no}.csv", no=nos.split(' '))
+
+rule python_script:
+    input: 
+        csv_file_in = "prices.csv"
+    output: 
+        csv_file_out = "csv_output_{csv_no}.csv"
+    threads: 1
+    resources: mem_mb=1000 # check jobinfo to see how much memory is used
+    script: 'python_script.py'
