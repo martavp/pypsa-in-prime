@@ -191,3 +191,5 @@ Paste the text (by right clicking) and save the file: Hit _Escape_, then write t
 
 24. 2021/08/31 As of today, I (Marta) have everything running on the cluster nicely with the following versions pypsa=0.18.0; 
 pypsa-eur=0.3.0, pypsa-eur-sec=0.5.0, technology-data=0.2.0. In case someone needs a reference of a compatible setup of packages.
+
+25. For the ones who have just started using the PRIME cluster with only one rule in the Snakefile, but wants to run in parallel with e.g. a range of different inputs, I have added a simple example of how this can be done in the folder _'cluster_test'_. You can modify the _python_script_ and the Snakefile to match it to your application. 
