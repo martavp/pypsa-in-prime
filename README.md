@@ -50,7 +50,7 @@ the environment using the 'environment.yaml' file provided in pypsa-eur
 
 
 9. Install gurobi in the environment
-> conda isntall -c gurobi gurobi
+> conda install -c gurobi gurobi
 
 10. In the folder '/PRIME_cluster' of this repository, there are two additional files needed to use snakemake in the PRIME. 
 
@@ -104,11 +104,6 @@ The config file should include a path to a folder where the temporal files durin
 
 If this path is not specified, the [default is to use the directory where the script is being executed](https://github.com/PyPSA/pypsa-eur/blob/2e70e8d15b722e818efb57cf72b35a9536340365/scripts/solve_network.py#L281) which can cause errors due to not enough space in PRIME.  
 
-
-17. Solution to "memory error".
-
-Indicate that temporary files for the solver must be saved in the temporary directory specified in the config file by changing the script 'solve_network.py' and including the attribute
-> n.lopf(pyomo=False, solver_name=solver_name, solver_dir=tmpdir,
 
 18. I (Marta) have manually increased the resources in rule build_renewable_profiles to speed up that rule in the cluster.
 
