@@ -98,7 +98,11 @@ Make sure to restart the terminal for these modifications to take effect.
 
 16. Solution to "memory error". 
 
-The config file should include a path to a folder where the temporal files during the solving of the network are saved.
+The config file should include a path to a folder where the temporal files during the solving of the network are saved. Best practice is to use the scratch memory:
+
+> tmpdir: "scratch/$SLURM_JOB_ID"
+
+Another option is to use your home folder:
 
 > tmpdir: "/home/marta/tmp"
 
