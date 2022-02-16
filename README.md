@@ -25,29 +25,36 @@ This [video](https://www.youtube.com/watch?v=ty47YU1_eeQ) provides a nice introd
 
 ### USING SNAKEMAKE IN THE CLUSTER ###
 
-1. Tu use the [PRIME cluster](https://mpe.au.dk/en/research/facilities/prime/), first you need to get a user. 
+1. To use the [PRIME cluster](https://mpe.au.dk/en/research/facilities/prime/), first you need to get a user. 
 
 2. You can connect to the cluster through the terminal, e.g.
 > ssh marta@prime.eng.au.dk
 
+The main way of interacting with the cluster will be through a terminal where you have run the ssh command to connect to prime. Alternatively you can use the program VScode as shown in step 22.
+
 3. Some useful commands to use in the cluster are described in the [labbook](https://labbook.au.dk/display/COM/3.+Convenient+commands).
 
-4. If you are using Windows, [WinSCP](https://winscp.net/eng/download.php) can be useful to copy folders to/from the cluster. Alternatively, use FileZilla on Windows, OSX or Linux. 
+4. If you are using Windows, [WinSCP](https://winscp.net/eng/download.php) can be useful to copy folders to/from the cluster. Alternatively, use FileZilla on Windows, OSX or Linux. This makes moving files on the cluster much easier as you would otherwise have to use commands in the terminal to move files. 
 
 5. To connect to the cluster you need to be connected to the university network, so if you are at home you need to use the VPN (The VPN only works for employee's and PhD students. Master students need to be on university network to connect to the cluster)
 
+#### The following commands must be run on the cluster. Log in to the cluster as shown in step 2 ####
+
 6. You will need to have installed [anaconda/miniconda](https://docs.conda.io/projects/conda/en/latest/user-guide/install/linux.html) in your home directory at the cluster
 
-7. You can install PyPSA-Eur-Sec following the [instructions](https://pypsa-eur-sec.readthedocs.io/en/latest/installation.html) 
+7. You can install PyPSA-Eur-Sec following the [instructions](https://pypsa-eur-sec.readthedocs.io/en/latest/installation.html). Installation may take a while. 
 
 8. You will need to have an environment with all the necessary packages, including [snakemake](https://snakemake.readthedocs.io/en/stable/)
 which is a very useful way of dealing with parallelized jobs in the cluster. One easy way to install all the packages that you need is to create
-the environment using the 'environment.yaml' file provided in pypsa-eur
+the environment using the 'environment.yaml' file provided in pypsa-eur. This step may take several minutes. 
 
 > .../pypsa-eur % conda env create -f envs/environment.yaml
 
 > .../pypsa-eur % conda activate pypsa-eur
 
+Everytime you log in to the cluster you must activate the envirionment again. The active environment will be shown in parenthesis in your terminal. 
+
+> (pypsa-eur) [marta@fe1 ~]$
 
 9. Install gurobi in the environment
 > conda install -c gurobi gurobi
@@ -174,7 +181,11 @@ This environment file (./environments/environment_pypsa_eur_macos.yml) works for
 
 22. VS Code 
 
+#### VS code must be installed on your local computer, not on prime ####
+
 [Visual Studio Code](https://code.visualstudio.com/) is a handy tool when working on the PRIME. It allows you to have your file explorer, [python editor](https://code.visualstudio.com/docs/python/python-tutorial), and terminal in one window. Install the [Remote - SSH extension](https://code.visualstudio.com/docs/remote/ssh) to connect with PRIME.
+
+If you experience issues with connecting VScode to prime, try setting the option "Remote.SSH: Lockfiles in Tmp" to true (check the box). 
 
 23. Avoid entering password when connecting to PRIME
 
