@@ -42,9 +42,17 @@ The main way of interacting with the cluster will be through a terminal where yo
 
 6. You will need to have installed [anaconda/miniconda](https://docs.conda.io/projects/conda/en/latest/user-guide/install/linux.html) in your home directory at the cluster
 
-7a. You can install PyPSA-Eur-Sec following the [instructions](https://pypsa-eur-sec.readthedocs.io/en/latest/installation.html). Installation may take a while. 
+7.a You can install PyPSA-Eur-Sec following the [instructions](https://pypsa-eur-sec.readthedocs.io/en/latest/installation.html). Installation may take a while. 
 
 7.b You can also [fork](https://docs.github.com/en/get-started/quickstart/fork-a-repo) the repositories *pypsa-eur*, *technology_data*, and *pypsa-eur-sec* on your Github, and clone them to your repository on Prime. This allows you to apply source control with Git (This is easily done in VSC. See item no. 22).
+
+7.c Get databundle from zenodo if wget does not work
+
+Install zenodo-get with the command:
+> pip install zenodo-get
+
+Then retrieve the repository with:
+> zenodo_get 10.5281/zenodo.5824485
 
 8. You will need to have an environment with all the necessary packages, including [snakemake](https://snakemake.readthedocs.io/en/stable/)
 which is a very useful way of dealing with parallelized jobs in the cluster. One easy way to install all the packages that you need is to create
