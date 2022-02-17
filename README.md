@@ -42,7 +42,9 @@ The main way of interacting with the cluster will be through a terminal where yo
 
 6. You will need to have installed [anaconda/miniconda](https://docs.conda.io/projects/conda/en/latest/user-guide/install/linux.html) in your home directory at the cluster
 
-7. You can install PyPSA-Eur-Sec following the [instructions](https://pypsa-eur-sec.readthedocs.io/en/latest/installation.html). Installation may take a while. 
+7a. You can install PyPSA-Eur-Sec following the [instructions](https://pypsa-eur-sec.readthedocs.io/en/latest/installation.html). Installation may take a while. 
+
+7.b You can also [fork](https://docs.github.com/en/get-started/quickstart/fork-a-repo) the repositories *pypsa-eur*, *technology_data*, and *pypsa-eur-sec* on your Github, and clone them to your repository on Prime. This allows you to apply source control with Git (This is easily done in VSC. See item no. 22).
 
 8. You will need to have an environment with all the necessary packages, including [snakemake](https://snakemake.readthedocs.io/en/stable/)
 which is a very useful way of dealing with parallelized jobs in the cluster. One easy way to install all the packages that you need is to create
@@ -186,6 +188,8 @@ This environment file (./environments/environment_pypsa_eur_macos.yml) works for
 [Visual Studio Code](https://code.visualstudio.com/) is a handy tool when working on the PRIME. It allows you to have your file explorer, [python editor](https://code.visualstudio.com/docs/python/python-tutorial), and terminal in one window. Install the [Remote - SSH extension](https://code.visualstudio.com/docs/remote/ssh) to connect with PRIME.
 
 If you experience issues with connecting VScode to prime, try setting the option "Remote.SSH: Lockfiles in Tmp" to true (check the box). 
+
+To commit from your prime repository to your github, go to the *source control* and give your commit a name and press ctrl + enter. If you want the commit to be pushed automatically, after having committed, go to settings --> Remote [SSH: prime.eng.au.dk] --> Git --> Post Commit Command --> change "none" to "push"
 
 23. Avoid entering password when connecting to PRIME
 
