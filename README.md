@@ -63,7 +63,11 @@ Everytime you log in to the cluster you must activate the envirionment again. Th
 
 10. In the folder '/PRIME_cluster' of this repository, there are two additional files needed to use snakemake in the PRIME. 
 
-Copy the files 'cluster.yaml' and 'snakemake_cluster' to the directory '.../pypsa-eur-sec/'  in your folders in the cluster
+First, you might want to clone this repository:
+
+> git clone https://github.com/martavp/pypsa-in-prime.git
+
+Copy the files 'cluster.yaml' and 'snakemake_cluster' to the directory '.../pypsa-eur-sec/' in your folders in the cluster. 
 
 Then, to run snakemake, you only need to write the following instruction in the command line (jobs identify the number of jobs that you want to parallelize if you send more that one job simultaneously). 
 
