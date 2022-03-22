@@ -13,7 +13,7 @@ The content of this document is structured as follows:<br>
 3 [Setting up the cluster](#setting-up-the-cluster)  <br>
 4 [Running simulations](#running-simulations)<br>
 5 [Typpical errors](#typical-errors)<br>
-6 [Extra stuff that will make your much life easier](#extra-stuff-that-will-make-your-life-easier)<br>
+6 [Extra stuff that will make your life much easier](#extra-stuff-that-will-make-your-life-easier)<br>
 
 ## General information about *PyPSA-Eur-Sec* 
 
