@@ -5,7 +5,7 @@ This repository includes instructions and tricks to run the [PyPSA-Eur-Sec](http
 
 Its main purpose is to help master and PhD students install the packages and run simulations with [PyPSA-Eur-Sec](https://pypsa-eur-sec.readthedocs.io/en/latest/). 
 
-If you encounter a problem (and hopefully also a solution). Please, edit this README file with the solution so that other students can also benefit.
+If you encounter a problem (and hopefully also a solution), please, edit this README file with the solution so that other students can also benefit.
 
 The content of this document is structured as follows:  
 1 [General information about PyPSA-Eur-Sec](#general-information-about-pypsa-eur-sec)  
@@ -17,9 +17,9 @@ The content of this document is structured as follows:
 
 ## General information about *PyPSA-Eur-Sec* 
 
-[PyPSA-Eur-Sec](https://pypsa-eur-sec.readthedocs.io/en/latest/) is model of the European energy sector including sector coupling. The model is build with the open source python module [PyPSA](https://pypsa.readthedocs.io/en/latest/). The [PyPSA-Eur-Sec](https://pypsa-eur-sec.readthedocs.io/en/latest/) model builds on the older model [PyPSA-Eur](https://pypsa-eur.readthedocs.io/en/latest/) of the European electricity network (without sector coupling). PyPSA-Eur is therefore included as part of PyPSA-Eur-Sec. [PyPSA-Eur-Sec](https://pypsa-eur-sec.readthedocs.io/en/latest/) also use the module [Technology-data](https://github.com/PyPSA/technology-data) to get data on the energy system. Technology-Data is a repository including costs, efficiencies, lifetimes, etc for different technologies.
+[PyPSA-Eur-Sec](https://pypsa-eur-sec.readthedocs.io/en/latest/) is a model of the European energy sector including sector coupling. The model is built with the open source python module [PyPSA](https://pypsa.readthedocs.io/en/latest/). The [PyPSA-Eur-Sec](https://pypsa-eur-sec.readthedocs.io/en/latest/) model builds on an older model [PyPSA-Eur](https://pypsa-eur.readthedocs.io/en/latest/) of the European electricity network, without sector coupling. PyPSA-Eur is therefore included as part of PyPSA-Eur-Sec. [PyPSA-Eur-Sec](https://pypsa-eur-sec.readthedocs.io/en/latest/) also uses the module [Technology-data](https://github.com/PyPSA/technology-data) to get data on the energy system. Technology-Data is a repository including costs, efficiencies, lifetimes, etc for different technologies.
 
-The [PyPSA-Eur-Sec](https://pypsa-eur-sec.readthedocs.io/en/latest/) use the [Snakemake](https://snakemake.readthedocs.io/en/stable/) workflow management system to run simulations. By using Snakemake simulations can be run without opening python files, but simply by running a Snakemake command. Snakemake automatically runs all the needed python scripts for a given simulation. The simulations are configured in the `config.yaml` file. The Snakemake workflow is structured in the `SNAKEFILE`. [Step 10](#10-configure-snakemake) shows how to run the simmulation with Snakemake. 
+[PyPSA-Eur-Sec](https://pypsa-eur-sec.readthedocs.io/en/latest/) uses the [Snakemake](https://snakemake.readthedocs.io/en/stable/) workflow management system to run simulations. By using Snakemake simulations, python files can be run with a Snakemake command without having to open them. Snakemake automatically runs all the needed python scripts for a given simulation. The simulations are configured in the `config.yaml` file. The Snakemake workflow is structured in the `SNAKEFILE`. [Step 10](#10-configure-snakemake) shows how to run the simmulation with Snakemake. 
 
 There is a [distribution list](https://groups.google.com/g/pypsa) where PyPSA-related problems (and solutions) are discussed. You can ask questions here if you have troubles with the model.
 
@@ -32,7 +32,7 @@ This [video](https://www.youtube.com/watch?v=ty47YU1_eeQ) provides a nice introd
 
 ## Getting on to the cluster
 
-#### 1. Get acces to Prime
+#### 1. Get access to Prime
 To use the [PRIME cluster](https://mpe.au.dk/en/research/facilities/prime/), first you need to get a user. Write an email to Søren Madsen with sma@mpe.au.dk
 
 #### 2. Connect with ssh
@@ -58,7 +58,7 @@ To connect to the cluster you need to be connected to the university network, so
 You will need to have installed [anaconda/miniconda](https://docs.conda.io/projects/conda/en/latest/user-guide/install/linux.html) in your home directory at the cluster. Follow the guide at [anaconda/miniconda](https://docs.conda.io/projects/conda/en/latest/user-guide/install/linux.html).
 
 #### 2 Installing PyPSA-Eur-Sec
-You need to install PyPSA-Eur-Sec in the cluster. There are two approaches for that:
+You need to install PyPSA-Eur-Sec in the cluster. There are two approaches for this:
 
 ##### 2.a Installing PyPSA-Eur-Sec from 
 You can install PyPSA-Eur-Sec following the [instructions](https://pypsa-eur-sec.readthedocs.io/en/latest/installation.html). Installation may take a while. 
@@ -76,10 +76,10 @@ Then retrieve the repository with:
 
 #### 3. Installing the anaconda environment
 You will need to have an environment with all the necessary packages.
-The invoronment includes [snakemake](https://snakemake.readthedocs.io/en/stable/)
+The envoronment includes [snakemake](https://snakemake.readthedocs.io/en/stable/)
 which is a very useful way of dealing with parallelized jobs in the cluster. 
 To install all the packages that you need create
-the environment using the 'environment.yaml' file provided in pypsa-eur. This step may take several minutes. On the cluster move to the pypsa-eur folder in a terminal and type the following commands:
+the environment use the 'environment.yaml' file provided in pypsa-eur. This step may take several minutes. On the cluster change directories to the pypsa-eur folder in a terminal and type the following commands:
 
 > .../pypsa-eur % conda env create -f envs/environment.yaml
 
