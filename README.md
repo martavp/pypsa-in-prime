@@ -7,10 +7,10 @@ Its main purpose is to help master and PhD students install the packages and run
 If you encounter a problem (and hopefully also a solution). Please, edit this README file with the solution so that other students can also benefit.
 
 The content of this document is structured as follows:
-1 [General information about PyPSA-Eur-Sec](#general-information-about-pypsa-eur-sec)
-2 [Getting on to the cluster](#getting-on-to-the-cluster)
-3 [Setting up the cluster](#setting-up-the-cluster)
-4 [Extra stuff that will make your life easier](#extra-stuff-that-will-make-your-life-easier)
+1 [General information about PyPSA-Eur-Sec](#general-information-about-pypsa-eur-sec)  
+2 [Getting on to the cluster](#getting-on-to-the-cluster)  
+3 [Setting up the cluster](#setting-up-the-cluster)  
+4 [Extra stuff that will make your life easier](#extra-stuff-that-will-make-your-life-easier)  
 
 ### General information about *PyPSA-Eur-Sec* 
 
