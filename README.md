@@ -1,5 +1,6 @@
 # Running PyPSA-Eur-Sec in PRIME
 
+
 This repository includes instructions and tricks to run the [PyPSA-Eur-Sec](https://pypsa-eur-sec.readthedocs.io/en/latest/) model on the cluster computer [PRIME](https://mpe.au.dk/en/research/facilities/prime/).
 
 Its main purpose is to help master and PhD students install the packages and run simulations with [PyPSA-Eur-Sec](https://pypsa-eur-sec.readthedocs.io/en/latest/). 
@@ -10,7 +11,9 @@ The content of this document is structured as follows:
 1 [General information about PyPSA-Eur-Sec](#general-information-about-pypsa-eur-sec)  
 2 [Getting on to the cluster](#getting-on-to-the-cluster)  
 3 [Setting up the cluster](#setting-up-the-cluster)  
-4 [Extra stuff that will make your life easier](#extra-stuff-that-will-make-your-life-easier)  
+4 [Running simulations]()
+5 [Typpical errors]()
+6 [Extra stuff that will make much your life easier](#extra-stuff-that-will-make-your-life-easier)  
 
 ## General information about *PyPSA-Eur-Sec* 
 
@@ -51,19 +54,19 @@ To connect to the cluster you need to be connected to the university network, so
 ## Setting up the cluster
 **The following commands must be run on the cluster. Log in to the cluster as shown in [step 2](#2-connect-with-ssh)**
 
-#### 6. Installing anaconda
+#### 1. Installing anaconda
 You will need to have installed [anaconda/miniconda](https://docs.conda.io/projects/conda/en/latest/user-guide/install/linux.html) in your home directory at the cluster. Follow the guide at [anaconda/miniconda](https://docs.conda.io/projects/conda/en/latest/user-guide/install/linux.html).
 
-#### 7 Installing PyPSA-Eur-Sec
+#### 2 Installing PyPSA-Eur-Sec
 You need to install PyPSA-Eur-Sec in the cluster. There are two approaches for that:
 
-##### 7.a Installing PyPSA-Eur-Sec from 
+##### 2.a Installing PyPSA-Eur-Sec from 
 You can install PyPSA-Eur-Sec following the [instructions](https://pypsa-eur-sec.readthedocs.io/en/latest/installation.html). Installation may take a while. 
 
-##### 7.b Install by forking (A bit more advanced)
-You can also [fork](https://docs.github.com/en/get-started/quickstart/fork-a-repo) the repositories *pypsa-eur*, *technology_data*, and *pypsa-eur-sec* on your Github, and clone them to your repository on Prime. This allows you to apply source control with Git (This is easily done in VSC. See [step 22](#22-vs-code)).
+##### 2.b Install by forking (A bit more advanced)
+You can also [fork](https://docs.github.com/en/get-started/quickstart/fork-a-repo) the repositories *pypsa-eur*, *technology_data*, and *pypsa-eur-sec* on your Github, and clone them to your repository on Prime. This allows you to apply source control with Git (This is easily done in VSCode. See [step 22](#22-vs-code)).
 
-##### 7.c Get databundle from zenodo if wget does not work
+##### 2.c Get databundle from zenodo if wget does not work
 
 Install zenodo-get with the command:
 > pip install zenodo-get
@@ -71,7 +74,7 @@ Install zenodo-get with the command:
 Then retrieve the repository with:
 > zenodo_get 10.5281/zenodo.5824485
 
-#### 8. Installing the anaconda environment
+#### 3. Installing the anaconda environment
 You will need to have an environment with all the necessary packages.
 The invoronment includes [snakemake](https://snakemake.readthedocs.io/en/stable/)
 which is a very useful way of dealing with parallelized jobs in the cluster. 
@@ -88,11 +91,11 @@ Everytime you log in to the cluster you must activate the envirionment again. Th
 
 > (pypsa-eur) [marta@fe1 ~]$
 
-#### 9. Install gurobi 
+#### 4. Install gurobi 
 Install the optimization software [Gurobi](https://www.gurobi.com) in the environment by running the command
 > conda install -c gurobi gurobi
 
-#### 10. Configure SNAKEMAKE 
+#### 5. Configure SNAKEMAKE 
 In the folder '/PRIME_cluster' of this repository, there are two additional files needed to use snakemake in the PRIME. 
 
 First, you might want to clone this repository:
@@ -106,19 +109,19 @@ Then, to run your simulations using Snakemake, you only need to write the follow
 
 > ./snakemake_cluster --jobs 5
 
-#### 11. Permission
+#### 6. Permission
 It is possible that you need to give execution permissions to snakemake_cluster, you can do it typing in the terminal.
 
 > chmod u+x snakemake_cluster
 
-#### 12. Log files
+#### 7. Log files
 Create a directory 'logs/cluster", as indicated in the file 'cluster.yaml'. This is where the logs and error files will be saved. Make sure that a folder 'logs/cluster' also exists in 'pypsa-eur/logs/cluster'.
 
-#### 13. Memory allocation
+#### 8. Memory allocation
 Check that the variable names in 'snakemake_cluster' comply with the variable names in your Snakefile. In particular, check that the memory attribution 
 (mem_mb) is the same in both files or correct if necessary. If any of the rule in 'pypsa-eur/Snakefile' is missing 'resources: mem_mb=' add it or substitute 'mem' by 'mem_mb'. 17-feb 2022: I (Ebbe) added a snakefile for _pypsa-eur 0.4.0_ in the folder _PRIME_cluster_ in which the 'resources: mem_mb' is now defined in all rules.
 
-#### 14. Setting up Gurobi in the cluster  
+#### 9. Setting up Gurobi in the cluster  
 
 On the PRIME-cluster, Gurobi needs to be pointed in the right direction as to where to look for packages and licenses. The first step is to add the following lines to the end of the file '.bashrc' located in /home/(AU-ID), as indicated in the [Gurobi guide](https://www.gurobi.com/documentation/6.5/quickstart_linux/software_installation_guid.html):
 
@@ -134,6 +137,9 @@ Additionally, the following line should be added at the end of the file '.bashrc
 
 This points Gurobi to the cluster-license. Note that an academic license used locally on a computer is unsuitable for use on the cluster, and will result in a failed simulation.
 
+## Running simulations
+
+## Typical Errors
 
 #### 15. Solution to "Solver (gurobi) returned non-zero return code (127)"
 
