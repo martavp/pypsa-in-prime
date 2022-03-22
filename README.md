@@ -11,8 +11,8 @@ The content of this document is structured as follows:
 1 [General information about PyPSA-Eur-Sec](#general-information-about-pypsa-eur-sec)  
 2 [Getting on to the cluster](#getting-on-to-the-cluster)  
 3 [Setting up the cluster](#setting-up-the-cluster)  
-4 [Running simulations]()
-5 [Typpical errors]()
+4 [Running simulations](#running-simulations)
+5 [Typpical errors](#typical-errors)
 6 [Extra stuff that will make much your life easier](#extra-stuff-that-will-make-your-life-easier)  
 
 ## General information about *PyPSA-Eur-Sec* 
@@ -39,7 +39,7 @@ To use the [PRIME cluster](https://mpe.au.dk/en/research/facilities/prime/), fir
  You can connect to the cluster through the terminal, e.g.
 > ssh marta@prime.eng.au.dk
 
-The main way of interacting with the cluster will be through a terminal where you have run the ssh command to connect to prime. A more modern way of interacting with the cluster is by using the program VSCode as shown in [step 22](#22-vs-code)
+The main way of interacting with the cluster will be through a terminal where you have run the ssh command to connect to prime. A more modern way of interacting with the cluster is by using the program VSCode as shown in [step 22](#vs-code)
 
 #### 3. Useful commands
 Some useful commands to use in the cluster are described in the [labbook](https://labbook.au.dk/display/COM/3.+Convenient+commands).
@@ -50,6 +50,7 @@ If you are using Windows, [WinSCP](https://winscp.net/eng/download.php) can be u
 #### 5. VPN
 To connect to the cluster you need to be connected to the university network, so if you are at home you need to use the VPN (The VPN only works for employee's and PhD students. Master students need to be on university network to connect to the cluster)
 
+If you don't want to type your password when you login take a look [here](#avoid-entering-password-when-connecting-to-prime)
 
 ## Setting up the cluster
 **The following commands must be run on the cluster. Log in to the cluster as shown in [step 2](#2-connect-with-ssh)**
@@ -58,34 +59,28 @@ To connect to the cluster you need to be connected to the university network, so
 You will need to have installed [anaconda/miniconda](https://docs.conda.io/projects/conda/en/latest/user-guide/install/linux.html) in your home directory at the cluster. Follow the guide at [anaconda/miniconda](https://docs.conda.io/projects/conda/en/latest/user-guide/install/linux.html).
 
 #### 2 Installing PyPSA-Eur-Sec
-You need to install PyPSA-Eur-Sec in the cluster. There are two approaches for this:
+Start by making a folder where you want to install PyPSA-Eur-Sec and all that is needed to run it. I would make it in the home directory and call it `projects`
 
-##### 2.a Installing PyPSA-Eur-Sec from 
-You can install PyPSA-Eur-Sec following the [instructions](https://pypsa-eur-sec.readthedocs.io/en/latest/installation.html). Installation may take a while. 
+> mkdir projects
 
-##### 2.b Install by forking (A bit more advanced)
-You can also [fork](https://docs.github.com/en/get-started/quickstart/fork-a-repo) the repositories *pypsa-eur*, *technology_data*, and *pypsa-eur-sec* on your Github, and clone them to your repository on Prime. This allows you to apply source control with Git (This is easily done in VSCode. See [step 22](#22-vs-code)).
+Now go in to that folder with
 
-##### 2.c Get databundle from zenodo if wget does not work
+> cd projects
 
-Install zenodo-get with the command:
-> pip install zenodo-get
+The first step of installing PyPSA-Eur-Sec is installing the PyPSA-Eur model. Follow the instruction given [here](https://pypsa-eur.readthedocs.io/en/latest/installation.html) carefully. 
 
-Then retrieve the repository with:
-> zenodo_get 10.5281/zenodo.5824485
+If you have trouble with the step that gets data from Zenodo take a look at this [fix](#get-databundle-from-zenodo-if-wget-does-not-work).
+
+You can then continue with install PyPSA-Eur-Sec following the [instructions](https://pypsa-eur-sec.readthedocs.io/en/latest/installation.html). See that the first step is to insall PyPSA-Eur. Make sure that you follow every step in the instructions carrefully. Installation may take a while. 
+
+An alternative but more advanced way of installing is shown [here](#install-by-forking-a-bit-more-advanced).
 
 #### 3. Installing the anaconda environment
-You will need to have an environment with all the necessary packages.
-The envoronment includes [snakemake](https://snakemake.readthedocs.io/en/stable/)
-which is a very useful way of dealing with parallelized jobs in the cluster. 
-To install all the packages that you need create
-the environment use the 'environment.yaml' file provided in pypsa-eur. This step may take several minutes. On the cluster change directories to the pypsa-eur folder in a terminal and type the following commands:
+You will need to have an anaconda environment with all the necessary packages. You should have created one when installing [PyPSA-Eur](https://pypsa-eur.readthedocs.io/en/latest/installation.html). Otherwise see how to do it [here](#creating-anaconda-environment).
 
-> .../pypsa-eur % conda env create -f envs/environment.yaml
+Activate the environment typing
 
-Activate the environment by typing
-
-> .../pypsa-eur % conda activate pypsa-eur
+> .../pypsa-eur$ conda activate pypsa-eur
 
 Everytime you log in to the cluster you must activate the envirionment again. The active environment will be shown in parenthesis in your terminal. 
 
@@ -121,6 +116,10 @@ Create a directory 'logs/cluster", as indicated in the file 'cluster.yaml'. This
 Check that the variable names in 'snakemake_cluster' comply with the variable names in your Snakefile. In particular, check that the memory attribution 
 (mem_mb) is the same in both files or correct if necessary. If any of the rule in 'pypsa-eur/Snakefile' is missing 'resources: mem_mb=' add it or substitute 'mem' by 'mem_mb'. 17-feb 2022: I (Ebbe) added a snakefile for _pypsa-eur 0.4.0_ in the folder _PRIME_cluster_ in which the 'resources: mem_mb' is now defined in all rules.
 
+I (Marta) have manually increased the resources in rule build_renewable_profiles to speed up that rule in the cluster. Go to the `Snakemake` file in the PyPSA-Eur-Sec folder and change the following line:
+
+> resources: mem=ATLITE_NPROCESSES * 50000
+
 #### 9. Setting up Gurobi in the cluster  
 
 On the PRIME-cluster, Gurobi needs to be pointed in the right direction as to where to look for packages and licenses. The first step is to add the following lines to the end of the file '.bashrc' located in /home/(AU-ID), as indicated in the [Gurobi guide](https://www.gurobi.com/documentation/6.5/quickstart_linux/software_installation_guid.html):
@@ -137,11 +136,50 @@ Additionally, the following line should be added at the end of the file '.bashrc
 
 This points Gurobi to the cluster-license. Note that an academic license used locally on a computer is unsuitable for use on the cluster, and will result in a failed simulation.
 
+
+
+
 ## Running simulations
 
-## Typical Errors
+Congratulations, if you have made it this far you are now ready to run some simulations and save the plannet. 
 
-#### 15. Solution to "Solver (gurobi) returned non-zero return code (127)"
+Start by making a `config.yaml` file by going in to the PyPSA-Eur-Sec folder and copy the default configfile 
+
+> projects/pypsa-eur-sec$ cp config.default.yaml config.yaml
+
+The `config.yaml` file is where all settings regarding the simulation is done. Edit the settings file with a texteditor. I (Tim) strongely recomend using VS Code. See how to install it [here](#vs-code).
+
+When you have made your settings you are now ready to run the simulations using SNAKEMAKE. 
+All simulations must be run from the PyPSA-Eur-Sec folder. To run the full simulations type the command: 
+
+> ./snakemake_cluster --jobs 5
+
+The `--jobs 5` indicate that 5 jobs can be run in parallel. 
+
+You can also run only parts of the simulation by specifying what rule to run 
+
+> ./snakemake_cluster --jobs 5 prepare_sector_networks
+
+This command would only run all scripts required to `prepare_sector_networks` and the `prepare_sector_networks` rule itself. You can take a look at the `SNAKEFILE` where all the rules are defined. For more information about how SNAKEMAKE works take a look at the [documentation](https://snakemake.readthedocs.io/en/stable/).
+## Typical Errors
+Here are some solutions to errors that you may encounter when working with PyPSA-Eur-Sec on Prime.
+
+#### Working settup
+2021/08/31 As of today, I (Marta) have everything running on the cluster nicely with the following versions:
+pypsa=0.18.0; 
+pypsa-eur=0.3.0, 
+pypsa-eur-sec=0.5.0, 
+technology-data=0.2.0. 
+In case someone needs a reference of a compatible setup of packages.
+#### Get databundle from zenodo if wget does not work
+
+Install zenodo-get with the command:
+> pip install zenodo-get
+
+Then retrieve the repository with:
+> zenodo_get 10.5281/zenodo.5824485
+
+#### Solution to "Solver (gurobi) returned non-zero return code (127)"
 
 A change needs to be made to the file 'gurobi.sh' located in /home/(AU-ID)/anaconda3/envs/(pypsa-eur_environment_name)/bin/gurobi.sh . The last line of this shell script needs to point to 'python2.7', 
 regardless of what Python version is used in the pypsa-eur environment in your local folder. Thus, the last line of 'gurobi.sh' needs to be:
@@ -151,7 +189,7 @@ regardless of what Python version is used in the pypsa-eur environment in your l
 Make sure to restart the terminal for these modifications to take effect.
 
 
-#### 16. Solution to "memory error". 
+#### Solution to "memory error". 
 
 The config file should include a path to a folder where the temporal files during the solving of the network are saved. Best practice is to use the scratch memory:
 
@@ -164,31 +202,16 @@ Another option is to use your home folder:
 If this path is not specified, the [default is to use the directory where the script is being executed](https://github.com/PyPSA/pypsa-eur/blob/2e70e8d15b722e818efb57cf72b35a9536340365/scripts/solve_network.py#L281) which can cause errors due to not enough space in PRIME.  
 
 
-#### 18. Memory resources
-I (Marta) have manually increased the resources in rule build_renewable_profiles to speed up that rule in the cluster.
-
-> resources: mem=ATLITE_NPROCESSES * 50000
-
-#### 19. Using PyPSA-Eur
-If you are using pypsa-eur independently of pypsa-eur-sec, to make sure that pypsa-eur gets to the final networks (with the solution), a rule all needs to be added to the Snakefile. 
-In practice, this means adding the following text: 
-
->rule all:
-
->    input:
-    
->        expand("results/networks/elec_s_{simpl}_{clusters}_ec_l{ll}_{opts}.nc",
->                **config['scenario'])
 
 
 
 ## Extra stuff that will make your life easier
 
-#### 20. Terminal multiplexer (optional, but useful)
+#### Terminal multiplexer (optional, but useful)
 
 If you get disconnected or close your terminal your execution ends. If you want to simulate over an extended period of time this needs to be obmitted. What you need to use is a terminal multiplexer. In the following there are listed two alternatives.
 
-##### 20a. GNU Screen
+##### a. GNU Screen
 
 This is the easier choice as it is already installed. 
 Starting Named Session by typing:
@@ -201,7 +224,7 @@ To resume your screen session use the following command:
 To find the session ID list the current running screen sessions with:
 > screen -ls
 
-##### 20b. TMUX
+##### b. TMUX
 
 TMUX is another terminal multiplexer but needs to be installed first. 
 ATTENTION: The execution of the workflow in a tmux-window defined in the Snakefile may result in the 'solve_network' rule to fail. This is different from system to system, but if it occurs, it can be solved by executing the rule 'solve_network' outside tmux.  
@@ -228,11 +251,11 @@ If one has forgotten the name of the session when trying to reattach, simply exe
 
 To get a list of the created sessions. The tmux commands described here, as well as many other neat ones, can be found  in this [article](https://www.howtogeek.com/671422/how-to-use-tmux-on-linux-and-why-its-better-than-screen/).
 
-#### 21. Environment file that works for Mac (17/5-2021)
+#### Environment file that works for Mac (17/5-2021)
 
 This environment file (./environments/environment_pypsa_eur_macos.yml) works for pypsa-eur-sec on MacOs. It may also work on other systems (not testet). 
 
-#### 22. VS Code 
+#### VS Code 
 
 ***VS Code must be installed on your local computer, not on the cluster***
 
@@ -242,7 +265,7 @@ If you experience issues with connecting VScode to prime, try setting the option
 
 To commit from your prime repository to your github, go to the *source control* and give your commit a name and press ctrl + enter. If you want the commit to be pushed automatically, after having committed, go to settings --> Remote [SSH: prime.eng.au.dk] --> Git --> Post Commit Command --> change "none" to "push"
 
-#### 23. Avoid entering password when connecting to PRIME
+#### Avoid entering password when connecting to PRIME
 
 On your local computer:
 
@@ -257,12 +280,33 @@ Press _Enter_ for default key name. Then _Enter_ for no password, and then _Ente
 Enter password when prompted. 
 
 
-#### 24. 2021/08/31 As of today, I (Marta) have everything running on the cluster nicely with the following versions:
-pypsa=0.18.0; 
-pypsa-eur=0.3.0, 
-pypsa-eur-sec=0.5.0, 
-technology-data=0.2.0. 
-In case someone needs a reference of a compatible setup of packages.
 
-#### 25. Example
+
+
+#### Using PyPSA-Eur
+If you are using pypsa-eur independently of pypsa-eur-sec, to make sure that pypsa-eur gets to the final networks (with the solution), a rule all needs to be added to the Snakefile. 
+In practice, this means adding the following text: 
+
+>rule all:
+
+>    input:
+    
+>        expand("results/networks/elec_s_{simpl}_{clusters}_ec_l{ll}_{opts}.nc",
+>                **config['scenario'])
+
+
+
+#### SNAKEMAKE Example
 For the ones who have just started using the PRIME cluster with only one rule in the Snakefile, but wants to run in parallel with e.g. a range of different inputs, I have added a simple example of how this can be done in the folder _'cluster_test'_. You can modify the _python_script_ and the Snakefile to match it to your application. 
+
+##### Install by forking (A bit more advanced)
+You can also [fork](https://docs.github.com/en/get-started/quickstart/fork-a-repo) the repositories *pypsa-eur*, *technology_data*, and *pypsa-eur-sec* on your Github, and clone them to your repository on Prime. This allows you to apply source control with Git (This is easily done in VSCode. See [step 22](#22-vs-code)).
+
+##### Creating anaconda environment 
+
+The envoronment includes [snakemake](https://snakemake.readthedocs.io/en/stable/)
+which is a very useful way of dealing with parallelized jobs in the cluster. 
+To install all the packages that you need create
+the environment use the 'environment.yaml' file provided in pypsa-eur. This step may take several minutes. On the cluster change directories to the pypsa-eur folder in a terminal and type the following commands:
+
+> .../pypsa-eur % conda env create -f envs/environment.yaml
