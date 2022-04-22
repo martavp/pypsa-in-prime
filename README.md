@@ -1,6 +1,14 @@
 # Running PyPSA-Eur-Sec in PRIME
 
+-----------------
 
+## IMOORTANT NOTICE
+
+PyPSA-Eur-Sec can slow down the entire PRIME cluster if the temporary directory is not specified correctly.
+
+When using PyPSA-Eur-Sec in PRIME it is very important that scratch memory is used as temporary directory. See how to do that in [step 10](#10. Using scratch memory for temporary directory). 
+
+----------------
 This repository includes instructions and tricks to run the [PyPSA-Eur-Sec](https://pypsa-eur-sec.readthedocs.io/en/latest/) model on the cluster computer [PRIME](https://mpe.au.dk/en/research/facilities/prime/).
 
 Its main purpose is to help master and PhD students install the packages and run simulations with [PyPSA-Eur-Sec](https://pypsa-eur-sec.readthedocs.io/en/latest/). 
@@ -136,7 +144,16 @@ Additionally, the following line should be added at the end of the file '.bashrc
 
 This points Gurobi to the cluster-license. Note that an academic license used locally on a computer is unsuitable for use on the cluster, and will result in a failed simulation.
 
+#### 10. Using scratch memory for temporary directory
 
+THIS STEP IS VERY IMPORTANT!! The entire PRIME cluster is slowed down if you do not include this. 
+
+When running simulations the Gurobi solver is constantly reading and writing temporary files. To avoid slowing down the entire PRIME cluster, it is very important that scratch memory is used for the temporary directory. Read more about scratch memory in the [labbook](https://labbook.au.dk/display/COM/3.+Convenient+commands).
+
+In the file `pypsa-eur-sec/config.yaml` (if that file doesn't exist go to `pypsa-eur-sec/config.default.yaml`) change the setting `tmpdir` under solving to 'scratch/$SLURM_JOB_ID'. Make sure the setting is not commented out . It should look like: 
+
+> solving: 
+>   tmpdir: 'scratch/$SLURM_JOB_ID'
 
 
 ## Running simulations
@@ -148,6 +165,8 @@ Start by making a `config.yaml` file by going in to the PyPSA-Eur-Sec folder and
 > projects/pypsa-eur-sec$ cp config.default.yaml config.yaml
 
 The `config.yaml` file is where all settings regarding the simulation is done. Edit the settings file with a texteditor. I (Tim) strongely recomend using VS Code. See how to install it [here](#vs-code).
+
+MAKE SURE THAT YOUR `tmpdir` setting is specified as in [step 10](#10. Using scratch memory for temporary directory).
 
 When you have made your settings you are now ready to run the simulations using SNAKEMAKE. 
 All simulations must be run from the PyPSA-Eur-Sec folder. To run the full simulations type the command: 
@@ -195,7 +214,7 @@ The config file should include a path to a folder where the temporal files durin
 
 > tmpdir: "scratch/$SLURM_JOB_ID"
 
-Another option is to use your home folder:
+Another option is to use your home folder (WARNING!! THIS MAY SLOW DOWN THE ENTIRE PRIME CLUSTER):
 
 > tmpdir: "/home/marta/tmp"
 
