@@ -2,11 +2,11 @@
 
 -----------------
 
-## IMOORTANT NOTICE
+## IMPORTANT NOTICE
 
 PyPSA-Eur-Sec can slow down the entire PRIME cluster if the temporary directory is not specified correctly.
 
-When using PyPSA-Eur-Sec in PRIME it is very important that scratch memory is used as temporary directory. See how to do that in [step 10](#10-using-scratch-memory-for-temporary-directory). 
+When using PyPSA-Eur-Sec in PRIME it is very important that scratch memory is used for the temporary directory. See how to do that in [step 10](#10-using-scratch-memory-for-temporary-directory). 
 
 ----------------
 This repository includes instructions and tricks to run the [PyPSA-Eur-Sec](https://pypsa-eur-sec.readthedocs.io/en/latest/) model on the cluster computer [PRIME](https://mpe.au.dk/en/research/facilities/prime/).
@@ -25,15 +25,15 @@ The content of this document is structured as follows:<br>
 
 ## General information about *PyPSA-Eur-Sec* 
 
-[PyPSA-Eur-Sec](https://pypsa-eur-sec.readthedocs.io/en/latest/) is a model of the European energy sector including sector coupling. The model is built with the open source python module [PyPSA](https://pypsa.readthedocs.io/en/latest/). The [PyPSA-Eur-Sec](https://pypsa-eur-sec.readthedocs.io/en/latest/) model builds on an older model [PyPSA-Eur](https://pypsa-eur.readthedocs.io/en/latest/) of the European electricity network, without sector coupling. PyPSA-Eur is therefore included as part of PyPSA-Eur-Sec. [PyPSA-Eur-Sec](https://pypsa-eur-sec.readthedocs.io/en/latest/) also uses the module [Technology-data](https://github.com/PyPSA/technology-data) to get data on the energy system. Technology-Data is a repository including costs, efficiencies, lifetimes, etc for different technologies.
+[PyPSA-Eur-Sec](https://pypsa-eur-sec.readthedocs.io/en/latest/) is a model of the European energy sector including sector coupling. The model is built with the open-source python module [PyPSA](https://pypsa.readthedocs.io/en/latest/). The [PyPSA-Eur-Sec](https://pypsa-eur-sec.readthedocs.io/en/latest/) model builds on an older model [PyPSA-Eur](https://pypsa-eur.readthedocs.io/en/latest/) of the European electricity network, without sector coupling. PyPSA-Eur is therefore included as part of PyPSA-Eur-Sec. [PyPSA-Eur-Sec](https://pypsa-eur-sec.readthedocs.io/en/latest/) also uses the module [Technology-data](https://github.com/PyPSA/technology-data) to get data on the energy system. Technology-Data is a repository including costs, efficiencies, lifetimes, etc for different technologies.
 
-[PyPSA-Eur-Sec](https://pypsa-eur-sec.readthedocs.io/en/latest/) uses the [Snakemake](https://snakemake.readthedocs.io/en/stable/) workflow management system to run simulations. By using Snakemake simulations, python files can be run with a Snakemake command without having to open them. Snakemake automatically runs all the needed python scripts for a given simulation. The simulations are configured in the `config.yaml` file. The Snakemake workflow is structured in the `SNAKEFILE`. [Step 10](#10-configure-snakemake) shows how to run the simmulation with Snakemake. 
+[PyPSA-Eur-Sec](https://pypsa-eur-sec.readthedocs.io/en/latest/) uses the [Snakemake](https://snakemake.readthedocs.io/en/stable/) workflow management system to run simulations. By using Snakemake simulations, python files can be run with a Snakemake command without having to open them. Snakemake automatically runs all the needed python scripts for a given simulation. The simulations are configured in the `config.yaml` file. The Snakemake workflow is structured in the `SNAKEFILE`. [Step 10](#10-configure-snakemake) shows how to run the simulation with Snakemake. 
 
-There is a [distribution list](https://groups.google.com/g/pypsa) where PyPSA-related problems (and solutions) are discussed. You can ask questions here if you have troubles with the model.
+There is a [distribution list](https://groups.google.com/g/pypsa) where PyPSA-related problems (and solutions) are discussed. You can ask questions here if you have any troubles with the model.
 
 There is also documentation for [PyPSA](https://pypsa.readthedocs.io/en/latest/), [PyPSA-Eur](https://pypsa-eur.readthedocs.io/en/latest/) and [PyPSA-Eur-Sec](https://pypsa-eur-sec.readthedocs.io/en/latest/). This repository does not substitute any of the previous information and it only focuses on issues related to running PyPSA-Eur-Sec in PRIME.
 
-NOTE: In order to set up anaconda, python, and pypsa, [these instructions](https://github.com/martavp/RES_project/blob/master/Instructions_RES_project.pdf) and the [tutorial for the course project in RES](https://github.com/martavp/RES_project/blob/master/RES_project.ipynb) could be useful. 
+NOTE: In order to set up anaconda, python, and PyPSA, [these instructions](https://github.com/martavp/RES_project/blob/master/Instructions_RES_project.pdf) and the [tutorial for the course project in RES](https://github.com/martavp/RES_project/blob/master/RES_project.ipynb) could be useful. 
 
 This [video](https://www.youtube.com/watch?v=ty47YU1_eeQ) provides a nice introduction to PyPSA-Eur. 
 
@@ -41,7 +41,7 @@ This [video](https://www.youtube.com/watch?v=ty47YU1_eeQ) provides a nice introd
 ## Getting on to the cluster
 
 #### 1. Get access to Prime
-To use the [PRIME cluster](https://mpe.au.dk/en/research/facilities/prime/), first you need to get a user. Write an email to Søren Madsen with sma@mpe.au.dk
+To use the [PRIME cluster](https://mpe.au.dk/en/research/facilities/prime/), first you need to get a user. Write an email to Søren Madsen at sma@mpe.au.dk
 
 #### 2. Connect with ssh
  You can connect to the cluster through the terminal, e.g.
@@ -56,7 +56,7 @@ Some useful commands to use in the cluster are described in the [labbook](https:
 If you are using Windows, [WinSCP](https://winscp.net/eng/download.php) can be useful to copy folders to/from the cluster. Alternatively, use FileZilla on Windows, OSX or Linux. This makes moving files on the cluster much easier as you would otherwise have to use commands in the terminal to move files. 
 
 #### 5. VPN
-To connect to the cluster you need to be connected to the university network, so if you are at home you need to use the VPN (The VPN only works for employee's and PhD students. Master students need to be on university network to connect to the cluster)
+To connect to the cluster you need to be connected to the university network, so if you are at home you need to use the VPN (The VPN only works for employees and PhD students. Master students need to be on the university network to connect to the cluster)
 
 If you don't want to type your password when you login take a look [here](#avoid-entering-password-when-connecting-to-prime)
 
@@ -71,7 +71,7 @@ Start by making a folder where you want to install PyPSA-Eur-Sec and all that is
 
 > mkdir projects
 
-Now go in to that folder with
+Now go into that folder with
 
 > cd projects
 
@@ -79,18 +79,18 @@ The first step of installing PyPSA-Eur-Sec is installing the PyPSA-Eur model. Fo
 
 If you have trouble with the step that gets data from Zenodo take a look at this [fix](#get-databundle-from-zenodo-if-wget-does-not-work).
 
-You can then continue with install PyPSA-Eur-Sec following the [instructions](https://pypsa-eur-sec.readthedocs.io/en/latest/installation.html). See that the first step is to insall PyPSA-Eur. Make sure that you follow every step in the instructions carrefully. Installation may take a while. 
+You can then continue with installing PyPSA-Eur-Sec following the [instructions](https://pypsa-eur-sec.readthedocs.io/en/latest/installation.html). Note that the first step is to install PyPSA-Eur. Make sure that you follow every step in the instructions carefully. Installation may take a while. 
 
 An alternative but more advanced way of installing is shown [here](#install-by-forking-a-bit-more-advanced).
 
 #### 3. Installing the anaconda environment
-You will need to have an anaconda environment with all the necessary packages. You should have created one when installing [PyPSA-Eur](https://pypsa-eur.readthedocs.io/en/latest/installation.html). Otherwise see how to do it [here](#creating-anaconda-environment).
+You will need to have an anaconda environment with all the necessary packages. You should have created one when installing [PyPSA-Eur](https://pypsa-eur.readthedocs.io/en/latest/installation.html). Otherwise, see how to do it [here](#creating-anaconda-environment).
 
-Activate the environment typing
+Activate the environment by typing
 
 > .../pypsa-eur$ conda activate pypsa-eur
 
-Everytime you log in to the cluster you must activate the envirionment again. The active environment will be shown in parenthesis in your terminal. 
+Every time you log in to the cluster you must activate the environment again. The active environment will be shown in parenthesis in your terminal. 
 
 > (pypsa-eur) [marta@fe1 ~]$
 
@@ -108,12 +108,12 @@ First, you might want to clone this repository:
 Copy the files 'cluster.yaml' and 'snakemake_cluster' to the directory '.../pypsa-eur-sec/' in your folders in the cluster. 
 
 
-Then, to run your simulations using Snakemake, you only need to write the following instruction in the command line (jobs identify the number of jobs that you want to parallelize if you send more that one job simultaneously). 
+Then, to run your simulations using Snakemake, you only need to write the following instruction in the command line (jobs identify the number of jobs that you want to parallelize if you send more than one job simultaneously). 
 
 > ./snakemake_cluster --jobs 5
 
 #### 6. Permission
-It is possible that you need to give execution permissions to snakemake_cluster, you can do it typing in the terminal.
+You possibly need to give execution permissions to the snakemake_cluster script. You can do it by the following command:
 
 > chmod u+x snakemake_cluster
 
@@ -142,15 +142,15 @@ Additionally, the following line should be added at the end of the file '.bashrc
 
 > export GRB_LICENSE_FILE="$GUROBI_HOME/gurobi.lic"
 
-This points Gurobi to the cluster-license. Note that an academic license used locally on a computer is unsuitable for use on the cluster, and will result in a failed simulation.
+This points Gurobi to the cluster license. Note that an academic license used locally on a computer is unsuitable for use on the cluster, and will result in a failed simulation.
 
-#### 10. Using scratch memory for temporary directory
+#### 10. Using scratch memory for the temporary directory
 
 THIS STEP IS VERY IMPORTANT!! The entire PRIME cluster is slowed down if you do not include this. 
 
 When running simulations the Gurobi solver is constantly reading and writing temporary files. To avoid slowing down the entire PRIME cluster, it is very important that scratch memory is used for the temporary directory. Read more about scratch memory in the [labbook](https://labbook.au.dk/display/COM/3.+Convenient+commands).
 
-In the file `pypsa-eur-sec/config.yaml` (if that file doesn't exist go to `pypsa-eur-sec/config.default.yaml`) change the setting `tmpdir` under solving to 'scratch/$SLURM_JOB_ID'. Make sure the setting is not commented out . It should look like: 
+In the file `pypsa-eur-sec/config.yaml` (if that file doesn't exist go to `pypsa-eur-sec/config.default.yaml`) change the setting `tmpdir` under solving to 'scratch/$SLURM_JOB_ID'. Make sure the setting is not commented out. It should look like this: 
 
 > solving: 
 >   tmpdir: 'scratch/$SLURM_JOB_ID'
@@ -158,13 +158,13 @@ In the file `pypsa-eur-sec/config.yaml` (if that file doesn't exist go to `pypsa
 
 ## Running simulations
 
-Congratulations, if you have made it this far you are now ready to run some simulations and save the plannet. 
+Congratulations, if you have made it this far you are now ready to run some simulations and save the planet. 
 
-Start by making a `config.yaml` file by going in to the PyPSA-Eur-Sec folder and copy the default configfile 
+Start by making a `config.yaml` file by going into the PyPSA-Eur-Sec folder and copying the default config file 
 
 > projects/pypsa-eur-sec$ cp config.default.yaml config.yaml
 
-The `config.yaml` file is where all settings regarding the simulation is done. Edit the settings file with a texteditor. I (Tim) strongely recomend using VS Code. See how to install it [here](#vs-code).
+The `config.yaml` file is where all settings regarding the simulation are done. Edit the settings file with a text editor. I (Tim) strongly recommend using VS Code. See how to install it [here](#vs-code).
 
 MAKE SURE THAT YOUR `tmpdir` setting is specified as in [step 10](#10-using-scratch-memory-for-temporary-directory).
 
@@ -190,7 +190,7 @@ pypsa-eur=0.3.0,
 pypsa-eur-sec=0.5.0, 
 technology-data=0.2.0. 
 In case someone needs a reference of a compatible setup of packages.
-#### Get databundle from zenodo if wget does not work
+#### Get the databundle from zenodo if wget does not work
 
 Install zenodo-get with the command:
 > pip install zenodo-get
@@ -210,7 +210,7 @@ Make sure to restart the terminal for these modifications to take effect.
 
 #### Solution to "memory error". 
 
-The config file should include a path to a folder where the temporal files during the solving of the network are saved. Best practice is to use the scratch memory:
+The config file should include a path to a folder where the temporal files during the solving of the network are saved. The best practice is to use the scratch memory:
 
 > tmpdir: "scratch/$SLURM_JOB_ID"
 
@@ -228,7 +228,7 @@ If this path is not specified, the [default is to use the directory where the sc
 
 #### Terminal multiplexer (optional, but useful)
 
-If you get disconnected or close your terminal your execution ends. If you want to simulate over an extended period of time this needs to be obmitted. What you need to use is a terminal multiplexer. In the following there are listed two alternatives.
+If you get disconnected or close your terminal your execution ends. If you want to simulate over an extended period of time this needs to be omitted. What you need to use is a terminal multiplexer. In the following, there are listed two alternatives.
 
 ##### a. GNU Screen
 
@@ -246,12 +246,12 @@ To find the session ID list the current running screen sessions with:
 ##### b. TMUX
 
 TMUX is another terminal multiplexer but needs to be installed first. 
-ATTENTION: The execution of the workflow in a tmux-window defined in the Snakefile may result in the 'solve_network' rule to fail. This is different from system to system, but if it occurs, it can be solved by executing the rule 'solve_network' outside tmux.  
+ATTENTION: The execution of the workflow in a tmux-window defined in the Snakefile may result in the 'solve_network' rule failing. This is different from system to system, but if it occurs, it can be solved by executing the rule 'solve_network' outside tmux.  
 When
 
 > ./snakemake_cluster --jobs 1
 
-is executed in the cluster, the workflow in the 'Snakefile' starts. The DAG of jobs will be built, and depending on how many jobs have been allowed to run in parallel with the execution command above, one or more jobs will be submitted to the cluster with their own unique job-ID. If one chooses to close the terminal window in which the cluster is accessed, only the submitted jobs will be executed. For example if the rule 'cluster_network' is the last job to be submitted, this job will finish, but the subsequent rules will not. Because of this, one must wait until the final rule, 'solve_network', has been submitted if one wants to for instance log off the cluster.  
+is executed in the cluster, the workflow in the 'Snakefile' starts. The DAG of jobs will be built, and depending on how many jobs have been allowed to run in parallel with the execution command above, one or more jobs will be submitted to the cluster with their own unique job-ID. If one chooses to close the terminal window in which the cluster is accessed, only the submitted jobs will be executed. For example, if the rule 'cluster_network' is the last job to be submitted, this job will finish, but the subsequent rules will not. Because of this, one must wait until the final rule, 'solve_network', has been submitted if one wants to for instance log off the cluster.  
 A solution for this, that allows for inputting the executing command and immediately logging off the cluster, is a terminal multiplexer called 'tmux'. This allows for having multiple windows in the same terminal window. To install it, make sure to have an Anaconda environment active in the cluster terminal window, and execute the following:
 
 > conda install -c conda-forge tmux
@@ -268,11 +268,11 @@ If one has forgotten the name of the session when trying to reattach, simply exe
 
 > tmux
 
-To get a list of the created sessions. The tmux commands described here, as well as many other neat ones, can be found  in this [article](https://www.howtogeek.com/671422/how-to-use-tmux-on-linux-and-why-its-better-than-screen/).
+To get a list of the created sessions. The tmux commands described here, as well as many other neat ones, can be found in this [article](https://www.howtogeek.com/671422/how-to-use-tmux-on-linux-and-why-its-better-than-screen/).
 
 #### Environment file that works for Mac (17/5-2021)
 
-This environment file (./environments/environment_pypsa_eur_macos.yml) works for pypsa-eur-sec on MacOs. It may also work on other systems (not testet). 
+This environment file (./environments/environment_pypsa_eur_macos.yml) works for pypsa-eur-sec on MacOs. It may also work on other systems (not tested). 
 
 #### VS Code 
 
@@ -282,17 +282,17 @@ This environment file (./environments/environment_pypsa_eur_macos.yml) works for
 
 If you experience issues with connecting VScode to prime, try setting the option "Remote.SSH: Lockfiles in Tmp" to true (check the box). 
 
-To commit from your prime repository to your github, go to the *source control* and give your commit a name and press ctrl + enter. If you want the commit to be pushed automatically, after having committed, go to settings --> Remote [SSH: prime.eng.au.dk] --> Git --> Post Commit Command --> change "none" to "push"
+To commit from your prime repository to your GitHub, go to the *source control* and give your commit a name and press ctrl + enter. If you want the commit to be pushed automatically, after having committed, go to settings --> Remote [SSH: prime.eng.au.dk] --> Git --> Post Commit Command --> change "none" to "push"
 
-#### Avoid entering password when connecting to PRIME
+#### Avoid entering your password when connecting to PRIME
 
-On your local computer:
+This is not secure and not officially recommended! Using SSH keys is a good idea but best to set a strong password for them. 
 
-Generate a ssh key by running:
+On your local computer, generate an ssh key by running:
 
 > (Local path) > ssh-keygen
 
-Press _Enter_ for default key name. Then _Enter_ for no password, and then _Enter_ again to confirm. A password key is created under *Local path* in the file _"id_rsa.pub"_. Coppy the key to the cluster by running the folling command:
+Press _Enter_ for the default key name. Then _Enter_ for no password, and then _Enter_ again to confirm. A password key is created under *Local path* in the file _"id_rsa.pub"_. Copy the key to the cluster by running the following command:
 
 > ssh-copy-id -i ~/.ssh/id_rsa.pub prime.eng.au.dk
 
@@ -316,16 +316,15 @@ In practice, this means adding the following text:
 
 
 #### SNAKEMAKE Example
-For the ones who have just started using the PRIME cluster with only one rule in the Snakefile, but wants to run in parallel with e.g. a range of different inputs, I have added a simple example of how this can be done in the folder _'cluster_test'_. You can modify the _python_script_ and the Snakefile to match it to your application. 
+For the ones who have just started using the PRIME cluster with only one rule in the Snakefile, but want to run in parallel with e.g. a range of different inputs, I have added a simple example of how this can be done in the folder _'cluster_test'_. You can modify the _python_script_ and the Snakefile to match it to your application. 
 
 ##### Install by forking (A bit more advanced)
 You can also [fork](https://docs.github.com/en/get-started/quickstart/fork-a-repo) the repositories *pypsa-eur*, *technology_data*, and *pypsa-eur-sec* on your Github, and clone them to your repository on Prime. This allows you to apply source control with Git (This is easily done in VSCode. See [step 22](#22-vs-code)).
 
 ##### Creating anaconda environment 
 
-The envoronment includes [snakemake](https://snakemake.readthedocs.io/en/stable/)
+The environment includes [snakemake](https://snakemake.readthedocs.io/en/stable/)
 which is a very useful way of dealing with parallelized jobs in the cluster. 
-To install all the packages that you need create
-the environment use the 'environment.yaml' file provided in pypsa-eur. This step may take several minutes. On the cluster change directories to the pypsa-eur folder in a terminal and type the following commands:
+To install all the packages that you need to create the environment use the 'environment.yaml' file provided in pypsa-eur. This step may take several minutes. On the cluster change directories to the pypsa-eur folder in a terminal and type the following commands:
 
 > .../pypsa-eur % conda env create -f envs/environment.yaml
