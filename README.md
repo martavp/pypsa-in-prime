@@ -188,7 +188,8 @@ Here are some solutions to errors that you may encounter when working with PyPSA
 pypsa=0.18.0; 
 pypsa-eur=0.3.0, 
 pypsa-eur-sec=0.5.0, 
-technology-data=0.2.0. 
+technology-data=0.2.0.,
+powerplantmatching=0.4.8
 In case someone needs a reference of a compatible setup of packages.
 #### Get the databundle from zenodo if wget does not work
 
