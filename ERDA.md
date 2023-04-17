@@ -18,7 +18,7 @@ The easiest way to upload files to ERDA from the PRIME cluster is using the SFTP
 #### 3. Connect to ERDA from PRIME
 log on to PRIME from your terminal and connect to ERDA with the below command :
 
-  sftp -p 2222 (your user name here)@io.erda.au.dk
+  sftp -P 2222 (your user name here)@io.erda.au.dk
   
 You can find your username under 'login details' on the SFTP setup page on ERDA. The username is usually your email address, i.e. : pr@mpe.au.dk  
   
