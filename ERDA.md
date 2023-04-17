@@ -32,7 +32,7 @@ Let's say you want to move files from the /home/com/meenergy folder on PRIME to 
   
   Local working directory: /home 
   
-  sftp> lcd /com/meenergy
+  sftp> lcd com/meenergy
   
   sftp> Ipwd
   
