@@ -32,7 +32,7 @@ Let's say you want to move files from the /home/com/meenergy/data/pypsa_networks
   
   Local working directory: /home 
   
-  sftp> lcd com/meenergy
+  sftp> lcd com/meenergy/data/pypsa_networks
   
   sftp> lpwd
   
