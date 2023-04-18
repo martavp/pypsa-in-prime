@@ -55,3 +55,10 @@ You can also download files from ERDA to PRIME using the 'get' command.
 Type 'bye' or 'quit' in the terminal to quit the SFTP.
 #### Further reading
 Read this guide on SFTP for more information : https://linuxize.com/post/how-to-use-linux-sftp-command-to-transfer-files/?utm_content=cmp-true
+
+#### Extra: Mounting ERDA on local computer:
+You can use the other feature *WebDAVS* to mount ERDA on your local computer. The procedure (on windows) is as the following:
+- Setup the Webdavs on ERDA by accessing the setup, enter the WebDAVS box on top, and write a password for login (it does not have to be identical with the ERDA login password) 
+- Open the File Explorer on your local computer and copy&paste this link https://io.erda.au.dk:4443 into the address bar and hit enter
+- Enter your username (email) and password that you defined in the first step
+- You can now browse your ERDA files locally from your compuer. You can pin the folder to the Quick access toolbar to have it permanently mounted.
