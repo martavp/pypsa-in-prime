@@ -23,7 +23,7 @@ log on to PRIME from your terminal and connect to ERDA with the below command :
 Port number is usually 2222. You can find your port number and username under 'login details' on the SFTP setup page on ERDA. The username is usually your email address, i.e. : pr@mpe.au.dk  
   
 #### 4. Moving files to ERDA
-To navigate PRIME and ERDA after connecting with SFTP, use cd for changing directory on ERDA, and 'lcd' for changing directory on PRIME. The 'l' can be added to al commands to indicate that they must be run on the local directory.
+To navigate PRIME and ERDA after connecting with SFTP, use cd for changing directory on ERDA, and 'lcd' for changing directory on PRIME. The 'l' can be added to all commands to indicate that they must be run on the local directory.
 Let's say you want to move files from the /home/com/meenergy/data/pypsa_networks folder on PRIME to a new folder we call "private" on ERDA:
 
   connected to io.erda.au.dk
