@@ -155,6 +155,23 @@ In the file `pypsa-eur-sec/config.yaml` (if that file doesn't exist go to `pypsa
 > solving: 
 >   tmpdir: 'scratch/$SLURM_JOB_ID'
 
+Important note: In the merged version of PyPSA-Eur, the "tmpdir" definition in the config file has no effect. Instead, you need to add an argument in function solving the network "n.optimize()" located in the script "solve_network". This looks like the following:
+
+```Python
+from pathlib import Path
+
+tmpdir = '/scratch/' + os.environ['SLURM_JOB_ID']
+
+if tmpdir_scratch is not None:
+    Path(tmpdir_scratch).mkdir(parents=True, exist_ok=True)
+
+status, condition = n.optimize(
+                            solver_name=solver_name,
+                            model_kwargs={"solver_dir":tmpdir},
+                            extra_functionality=extra_functionality,
+                            **solver_options,
+                            **kwargs,
+```
 
 ## Running simulations
 
