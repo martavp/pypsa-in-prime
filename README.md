@@ -159,6 +159,7 @@ Important note: In the merged version of PyPSA-Eur, the "tmpdir" definition in t
 
 ```Python
 from pathlib import Path
+import os
 
 tmpdir = '/scratch/' + os.environ['SLURM_JOB_ID']
 
