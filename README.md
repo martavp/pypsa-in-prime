@@ -319,7 +319,7 @@ Enter password when prompted.
  
 #### Extending run-time for long jobs
 
-If you need to run jobs that take a longer time to finish than the default 4 days, you can adjust the 'snakemake_cluster' as below:
+If you need to run jobs that take a longer time to finish than the default 4 days, you can update the 'snakemake_cluster' by adding your preferred time as shown in the example below for 10 dyas:
 
 snakemake .... "sbatch ... --time=240:00:00" "$@"
 
