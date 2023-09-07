@@ -316,8 +316,12 @@ Press _Enter_ for the default key name. Then _Enter_ for no password, and then _
 > ssh-copy-id -i ~/.ssh/id_rsa.pub prime.eng.au.dk
 
 Enter password when prompted. 
+ 
+#### Extending run-time for long jobs
 
+If you need to run jobs that take a longer time to finish than the default 4 days, you can adjust the 'snakemake_cluster' as below:
 
+snakemake .... "sbatch ... --time=240:00:00" "$@"
 
 
 
