@@ -1,4 +1,4 @@
-# Running PyPSA-Eur-Sec in PRIME
+![image](https://github.com/martavp/pypsa-in-prime/assets/118364986/7827d934-9197-41a9-ab9e-b20ddcc936e1)# Running PyPSA-Eur-Sec in PRIME
 
 -----------------
 
@@ -20,7 +20,7 @@ The content of this document is structured as follows:<br>
 2 [Getting on to the cluster](#getting-on-to-the-cluster)  <br>
 3 [Setting up the cluster](#setting-up-the-cluster)  <br>
 4 [Running simulations](#running-simulations)<br>
-5 [Typpical errors](#typical-errors)<br>
+5 [Typical errors](#typical-errors)<br>
 6 [Extra stuff that will make your life much easier](#extra-stuff-that-will-make-your-life-easier)<br>
 
 ## General information about *PyPSA-Eur-Sec* 
@@ -198,6 +198,11 @@ You can also run only parts of the simulation by specifying what rule to run
 > ./snakemake_cluster --jobs 5 prepare_sector_networks
 
 This command would only run all scripts required to `prepare_sector_networks` and the `prepare_sector_networks` rule itself. You can take a look at the `SNAKEFILE` where all the rules are defined. For more information about how SNAKEMAKE works take a look at the [documentation](https://snakemake.readthedocs.io/en/stable/).
+
+Important note: If you are using the merged version of PyPSA-Eur, you will have to use the following command to run full simulations:
+> ./snakemake_cluster -call all --jobs 5
+Failing to do so, would result in the `purge` rule being run, which deletes your entire `results` and `resources` folders.
+
 ## Typical Errors
 Here are some solutions to errors that you may encounter when working with PyPSA-Eur-Sec on Prime.
 
@@ -351,3 +356,13 @@ which is a very useful way of dealing with parallelized jobs in the cluster.
 To install all the packages that you need to create the environment use the 'environment.yaml' file provided in pypsa-eur. This step may take several minutes. On the cluster change directories to the pypsa-eur folder in a terminal and type the following commands:
 
 > .../pypsa-eur % conda env create -f envs/environment.yaml
+
+#### Avoid accidentally deleting your results and resources
+In the merged version of PyPSA-Eur, writing `./snakemake_cluster --jobs 5` instead of `./snakemake_cluster -call all --jobs 5` results in the `purge` rule being run, which deletes you `results` and `resources` folders. To avoid accidentally triggering this rule, you can go to the snakefile and comment out the lines deleting the folders:
+> rule purge:
+>    message:
+>        "Purging generated resources, results and docs. Downloads are kept."
+>    run:
+>        #rmtree("resources/", ignore_errors=True)
+>        #rmtree("results/", ignore_errors=True)
+>        #rmtree("doc/_build", ignore_errors=True)
