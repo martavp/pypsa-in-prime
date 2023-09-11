@@ -1,4 +1,4 @@
-![image](https://github.com/martavp/pypsa-in-prime/assets/118364986/7827d934-9197-41a9-ab9e-b20ddcc936e1)# Running PyPSA-Eur-Sec in PRIME
+# Running PyPSA-Eur-Sec in PRIME
 
 -----------------
 
