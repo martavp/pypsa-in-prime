@@ -201,6 +201,7 @@ This command would only run all scripts required to `prepare_sector_networks` an
 
 Important note: If you are using the merged version of PyPSA-Eur, you will have to use the following command to run full simulations:
 > ./snakemake_cluster -call all --jobs 5
+
 Failing to do so, would result in the `purge` rule being run, which deletes your entire `results` and `resources` folders.
 
 ## Typical Errors
@@ -360,9 +361,16 @@ To install all the packages that you need to create the environment use the 'env
 #### Avoid accidentally deleting your results and resources
 In the merged version of PyPSA-Eur, writing `./snakemake_cluster --jobs 5` instead of `./snakemake_cluster -call all --jobs 5` results in the `purge` rule being run, which deletes you `results` and `resources` folders. To avoid accidentally triggering this rule, you can go to the snakefile and comment out the lines deleting the folders:
 > rule purge:
+> 
 >    message:
+> 
 >        "Purging generated resources, results and docs. Downloads are kept."
+> 
 >    run:
+> 
 >        #rmtree("resources/", ignore_errors=True)
+> 
 >        #rmtree("results/", ignore_errors=True)
+> 
 >        #rmtree("doc/_build", ignore_errors=True)
+> 
