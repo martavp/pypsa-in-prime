@@ -132,7 +132,7 @@ I (Marta) have manually increased the resources in rule build_renewable_profiles
 
 On the PRIME-cluster, Gurobi needs to be pointed in the right direction as to where to look for packages and licenses. The first step is to add the following lines to the end of the file '.bashrc' located in /home/(AU-ID), as indicated in the [Gurobi guide](https://www.gurobi.com/documentation/6.5/quickstart_linux/software_installation_guid.html):
 
-> export GUROBI_HOME="/home/com/meenergy/gurobi651/linux64"
+> export GUROBI_HOME="/home/com/meenergy/gurobi1101/linux64"
 
 > export PATH="${PATH}:${GUROBI_HOME}/bin"
 
