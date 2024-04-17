@@ -98,7 +98,7 @@ Every time you log in to the cluster you must activate the environment again. Th
 Install the optimization software [Gurobi](https://www.gurobi.com) in the environment by running the command
 > conda install -c gurobi gurobi
 
-#### 5. Configure SNAKEMAKE 
+#### 5.a Configure SNAKEMAKE (for snakemake versions <8)
 In the folder '/PRIME_cluster' of this repository, there are two additional files needed to use snakemake in the PRIME. 
 
 First, you might want to clone this repository:
@@ -111,6 +111,10 @@ Copy the files 'cluster.yaml' and 'snakemake_cluster' to the directory '.../pyps
 Then, to run your simulations using Snakemake, you only need to write the following instruction in the command line (jobs identify the number of jobs that you want to parallelize if you send more than one job simultaneously). 
 
 > ./snakemake_cluster --jobs 5
+
+#### 5.b Configure SNAKEMAKE (for snakemake versions >8)
+The syntaxis in snakemake has changed and it does not use anymore the option --cluster
+You can copy to your PRIME repository the new snakemake_cluster file saved in this_repository/PRIME_cluster/snakemake8/snakemake_cluster
 
 #### 6. Permission
 You possibly need to give execution permissions to the snakemake_cluster script. You can do it by the following command:
