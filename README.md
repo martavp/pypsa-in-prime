@@ -208,6 +208,19 @@ Important note: If you are using the merged version of PyPSA-Eur, you will have 
 
 Failing to do so, would result in the `purge` rule being run, which deletes your entire `results` and `resources` folders.
 
+### Alternative to "snakemake_cluster"
+Using the "snakemake_cluster" settings will allocate jobs to computing nodes randomly. If many jobs are run in parallel, it might conflict with other PRIME users who might have less modularizable work and therefore requires more continuous memory to be available. An alternative procedure could be the following:
+
+a1) Create new screen:
+> screen
+
+a2) Use srun to create a new job:
+> srun -p q64 --job-name "pypsa-eur" --ntasks=1 --cpus-per-task=4 --mem=100gb --time=4:00:00 --pty bash
+(here, I am using the q64 node, assigning a name of the job "pypsa-eur", the total memory allogcated is 100gb, and max duration is 4 hours)
+
+a3) when mounted to the computing node (check that you are not still on the front node!), the run snakemake:
+> snakemake -j 10
+
 ## Typical Errors
 Here are some solutions to errors that you may encounter when working with PyPSA-Eur-Sec on Prime.
 
