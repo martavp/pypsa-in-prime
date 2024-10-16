@@ -1,1 +1,1 @@
-snakemake --rerun-incomplete -call all --latency-wait 100 --cluster-generic-submit-cmd "sbatch --parsable -p q36, q64 -n 1 --cpus-per-task {threads} --mem {resources.mem_mb}" "$@"
+snakemake --rerun-incomplete -call all --latency-wait 100 --executor cluster-generic --cluster-generic-submit-cmd "sbatch --parsable -p q36,q64 -n 1 --cpus-per-task {threads} --mem {resources.mem_mb}" "$@"
