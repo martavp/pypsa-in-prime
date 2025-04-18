@@ -44,7 +44,11 @@ This [video](https://www.youtube.com/watch?v=ty47YU1_eeQ) provides a nice introd
 To use the [PRIME cluster](https://mpe.au.dk/en/research/facilities/prime/), first you need to get a user. Write an email to Søren Madsen at sma@mpe.au.dk
 
 #### 2. Connect with ssh
- You can connect to the cluster through the terminal, e.g.
+Update 16.01.25:
+You now need to use the jump host ssh.au.dk first to connect to the cluster. Further information [here](https://labbook.au.dk/pages/viewpage.action?spaceKey=COM&title=1.+Introduction):
+> ssh au123456@ssh.au.dk
+
+ You can then connect to the cluster through the terminal, e.g.
 > ssh marta@prime.eng.au.dk
 
 The main way of interacting with the cluster will be through a terminal where you have run the ssh command to connect to prime. A more modern way of interacting with the cluster is by using the program VSCode as shown in [step 22](#vs-code)
@@ -321,6 +325,10 @@ This environment file (./environments/environment_pypsa_eur_macos.yml) works for
 ***VS Code must be installed on your local computer, not on the cluster***
 
 [Visual Studio Code](https://code.visualstudio.com/) is a handy tool when working on the cluster. It allows you to have your file explorer, [python editor](https://code.visualstudio.com/docs/python/python-tutorial), and terminal in one window. Install the [Remote - SSH extension](https://code.visualstudio.com/docs/remote/ssh) to connect with PRIME.
+
+Edit 16.1.2025: To use VS Code with the jump code, I used these [instructions for Linux.](https://www.doc.ic.ac.uk/~nuric/posts/coding/how-to-setup-vs-code-remote-ssh-with-a-jump-host/). 
+
+You may also want to increase the connection timeout in VScode, which is set to 15s as a default. You find that by looking for Remote-SSH:Settings in the Command Palette and then scroll til Connect Timeout.
 
 Edit 2/2/2024 by Ebbe: The newest release (v1.86) is only compatible with Linux distributions based on glibc 2.28 or later, and glibcxx 3.4.25 or later, such as Debian 10, RHEL 8, or Ubuntu 20.04. **Currently, this is not fulfilled by PRIME**. I.e., in order to connect to PRIME with SSH, downgrade VS Code version to [v1.85](https://code.visualstudio.com/updates/v1_85). Moreover, to avoid automatic updates of VS Code, set Update Mode to "none" (under File/Preferences/settings/).
 
